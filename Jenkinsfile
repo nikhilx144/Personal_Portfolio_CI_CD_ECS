@@ -35,7 +35,7 @@ pipeline {
 
     stage('Push Image to ECR') {
       steps {
-        withAWS(credentials: 'aws_ecr_access_key', region: ${AWS_REGION}) {
+        withAWS(credentials: 'aws_ecr_access_key', region: "${AWS_REGION}") {
           echo "Logging into AWS ECR and pushing image..."
           sh """
             aws ecr get-login-password --region ${AWS_REGION} | \
@@ -50,7 +50,7 @@ pipeline {
 
     stage('Terraform Apply') {
       steps {
-        withAWS(credentials: 'aws-username-pass-access-key', region: ${AWS_REGION}) {
+        withAWS(credentials: 'aws-username-pass-access-key', region: "${AWS_REGION}") {
           dir("${TERRAFORM_DIR}") {
             echo "Running Terraform with image tag ${IMAGE_TAG}"
             sh """
