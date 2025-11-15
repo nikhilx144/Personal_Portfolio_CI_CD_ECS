@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishitha's Roadmap App</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 2rem 1rem;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      margin: 1rem;
+      padding: 1.5rem;
+      width: 270px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #333;
+    }
+
+    .card h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Different color accents per card */
+    .card.java {
+      border-top: 6px solid #ff6b6b;
+    }
+    
+    .card.aiml {
+      border-top: 6px solid #6a11cb;
+    }
+    
+    .card.devops {
+      border-top: 6px solid #00c853;
+    }
+
+    #roadmap-section {
+      background-color: #fff;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 85%;
+      max-width: 800px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    #roadmap-section ul {
+      text-align: left;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      background-color: #222;
+      color: white;
+      padding: 1rem 0;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+  </style>
+
+  <script>
+    const roadmaps = {
+      java: {
+        title: "Java Full Stack Roadmap",
+        steps: [
+          "Learn Core Java (OOPs, Collections, Exception Handling)",
+          "Master SQL & Databases (MySQL, PostgreSQL)",
+          "Frontend Basics: HTML, CSS, JavaScript",
+          "Frameworks: Spring Boot, Hibernate, REST APIs",
+          "Frontend Frameworks: React or Angular",
+          "Version Control: Git & GitHub",
+          "Build Tools: Maven or Gradle",
+          "Deployment: Docker, Jenkins CI/CD pipeline"
+        ]
+      },
+      aiml: {
+        title: "AI / ML Roadmap",
+        steps: [
+          "Learn Python fundamentals and libraries (NumPy, Pandas)",
+          "Understand Math for ML (Linear Algebra, Statistics)",
+          "Study ML algorithms (Regression, SVM, Decision Trees)",
+          "Deep Learning frameworks (TensorFlow, PyTorch)",
+          "Work on real datasets (Kaggle, UCI ML Repo)",
+          "Model deployment using Flask or FastAPI",
+          "Integrate ML models into applications"
+        ]
+      },
+      devops: {
+        title: "DevOps Roadmap",
+        steps: [
+          "Learn Linux and Shell Scripting",
+          "Understand Networking & Cloud basics (AWS, Azure, GCP)",
+          "Version Control using Git & GitHub",
+          "Build Tools: Maven, Gradle",
+          "CI/CD using Jenkins",
+          "Containerization with Docker",
+          "Orchestration using Kubernetes",
+          "Monitoring and Logging (Prometheus, Grafana, ELK Stack)"
+        ]
+      }
+    };
+
+    function showRoadmap(topic) {
+      const roadmap = roadmaps[topic];
+      document.getElementById('roadmap-title').textContent = roadmap.title;
+
+      const list = document.getElementById('roadmap-content');
+      list.innerHTML = "";
+      roadmap.steps.forEach(step => {
+        const li = document.createElement('li');
+        li.textContent = step;
+        list.appendChild(li);
+      });
+
+      document.getElementById('roadmap-section').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Edu Hub</h1>
+    <p class="subtitle">
+      Hi, I'm <strong>Rishitha Ballem</strong>. I've created these simple learning roadmaps based on my experience — to guide you through Java Full Stack, AI/ML, and DevOps paths.
+    </p>
+  </header>
+
+  <main>
+    <div class="cards">
+      <div class="card java" onclick="showRoadmap('java')">
+        <h2>Java Full Stack</h2>
+        <p>Start your journey to become a full-stack Java developer.</p>
+      </div>
+
+      <div class="card aiml" onclick="showRoadmap('aiml')">
+        <h2>AI / ML</h2>
+        <p>Dive into Artificial Intelligence and Machine Learning.</p>
+      </div>
+
+      <div class="card devops" onclick="showRoadmap('devops')">
+        <h2>DevOps</h2>
+        <p>Learn the modern DevOps practices to automate and scale.</p>
+      </div>
+    </div>
+
+    <section id="roadmap-section">
+      <h2 id="roadmap-title"></h2>
+      <ul id="roadmap-content"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created by Rishitha Ballem</p>
+  </footer>
+</body>
+</html>
