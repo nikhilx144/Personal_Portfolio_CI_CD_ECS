@@ -3,7 +3,6 @@ pipeline {
 
   environment {
     AWS_REGION     = 'ap-south-1'
-    // ECR_REPO       = '130358282811.dkr.ecr.ap-south-1.amazonaws.com/roadmap-app' # Have to add repo policy to ECR to allow ECS task exec role to pull images
     ECR_REPO       = '661979762009.dkr.ecr.ap-south-1.amazonaws.com/edu_map_ecr_repo' 
     TERRAFORM_DIR  = 'terraform/'
   }
@@ -36,8 +35,7 @@ pipeline {
 
     stage('Push Image to ECR') {
       steps {
-        // withAWS(credentials: 'aws_ecr_access_key', region: "${AWS_REGION}") {
-        withAWS(credentials: 'aws-username-pass-access-key', region: "${AWS_REGION}") {
+        withAWS(credentials: 'aws-ecr-access-key', region: "${AWS_REGION}") {
           echo "Logging into AWS ECR and pushing image..."
           sh """
             aws ecr get-login-password --region ${AWS_REGION} | \
@@ -52,7 +50,7 @@ pipeline {
 
     stage('Terraform Apply') {
       steps {
-        withAWS(credentials: 'aws-username-pass-access-key', region: "${AWS_REGION}") {
+        withAWS(credentials: 'aws-terraform-apply-access-key', region: "${AWS_REGION}") {
           dir("${TERRAFORM_DIR}") {
             echo "Running Terraform with image tag ${IMAGE_TAG}"
             sh """

@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "app_name" {
   type    = string
-  default = "monitoring-dashboard"
+  default = "edu_map"
 }
 
 # ECR repo base (without tag). This is the repo you push to / pull from.

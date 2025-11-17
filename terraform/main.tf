@@ -7,7 +7,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "monitoring-dashboard-vpc"
+    Name = "edu-map-vpc"
   }
 }
 
@@ -28,7 +28,7 @@ resource "aws_subnet" "public" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "monitoring-dashboard-igw"
+    Name = "edu-map-igw"
   }
 }
 
@@ -111,14 +111,14 @@ resource "aws_security_group" "ecs_sg" {
 # Application Load Balancer
 #############################
 resource "aws_lb" "app" {
-  name               = "monitoring-dashboard-alb"
+  name               = "edu-map-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = aws_subnet.public[*].id
 
   tags = {
-    Name = "monitoring-dashboard-alb"
+    Name = "edu-map-alb"
   }
 }
 
